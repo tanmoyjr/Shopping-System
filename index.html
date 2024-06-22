@@ -1,0 +1,556 @@
+<?php
+
+include 'config.php';
+
+session_start();
+
+$user_id = $_SESSION['user_id'];
+
+if(!isset($user_id)){
+   header('location:login.php');
+}
+
+?>
+
+        
+<?php
+        $select_profile = $conn->prepare("SELECT * FROM users WHERE id = ?");
+        $select_profile->execute([$user_id]);
+        $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+     ?>
+  
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website</title>
+    <link rel="stylesheet" href="styles.css">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+     <style>
+
+
+
+.profile-icon img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: white 1px solid;
+  list-style-type: none;
+ margin-top: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ONLINE STORE</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search" id="search">
+            <button onclick="searchProducts()">Search</button>
+        </div>
+        <nav>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">More</a>
+        </nav>
+
+        <div >
+            <a class="profile-icon" href="user_page.php" class="nav__link">
+            <img  src="uploaded_img/<?= $fetch_profile['image']; ?>" alt="">
+            </a>
+        </div>
+
+    </header>
+    <main>
+        
+        <section class="hero">
+            <div class="contnaier">
+                <div class="content">
+                    <p>Collect New Online Store</p>
+                    <h1>Look for Your <br> <span>Favorite Items</span></h1>
+                    <p>up to 40% off final sale items.</p>
+                    <p class="last-p">caught in the moment!</p>
+                    <a href="watch_prodect.php" class="btn">Show Collection</a>
+                </div>
+            </div>
+        </section>
+
+      
+        <section class="products" id="product-list">
+          
+        </section>
+      
+        <section class="categories">
+            <div onclick="document.location='watch_prodect.php'" href="watch_prodect.php" class="category">Mart</div>
+            <div onclick="document.location='watch_prodect.php'" class="category">Men's Fashion</div>
+            <div onclick="document.location='watch_prodect.php'" class="category">Women's Fashion</div>
+            <div onclick="document.location='watch_prodect.php'" class="category">Beauty & Glamour</div>
+            <div onclick="document.location='watch_prodect.php'" class="category">Home Makeover</div>
+        </section>
+    </main>
+
+
+    <section class="grid">
+        <div class="grid-container">
+            <div class="grid-item"  onclick="document.location='watch_prodect.php'">
+                <img src="image/camera.jpg" alt="Product 1">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/hedphone.jpg" alt="Product 2">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/Juta.jpg" alt="Product 3">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/laptop.jpg" alt="Product 4">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/MUSIC.jpg" alt="Product 5">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/phone.jpg" alt="Product 6">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/SHIRT copy.jpg" alt="Product 7">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/T SH.jpg" alt="Product 8">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/tws.jpg" alt="Product 9">
+            </div>
+            <div class="grid-item" onclick="document.location='watch_prodect.php'">
+                <img src="image/watch.jpg" alt="Product 9">
+            </div>
+        </div>
+    </section>
+
+    <div class="top-sec">
+                    <h3>Featured Products</h3>
+                </div>
+    
+  <section class="product">
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/watch.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/phone.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+    
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/MUSIC.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        
+        <div class="product-image">
+            <img src="image/camera.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+    
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/laptop.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/SHIRT copy.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/T SH.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/tws.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/hedphone.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/juta.jpg" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/watch 1.png" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/watch 2.png" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/watch 3.png" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/watch 4.png" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="image/watch 4.png" alt="Product Image">
+            <div class="badge">Hot</div>
+            <div class="badge">Best Price</div>
+        </div>
+        <div class="product-info">
+            <h2>New Stylish Square Sunglasses Frame for Men</h2>
+            <div class="rating">
+                <span>⭐ 3.8/5 (24)</span>
+                <span>198 Sold</span>
+            </div>
+            <div class="price">
+                <span class="current-price">৳ 251</span>
+                <span class="original-price">৳ 600</span>
+                <span class="discount">6% Off</span>
+            </div>
+            <button  onclick="document.location='order_option.php'"class="buy-now">Order New</button>
+        </div>
+    </div>
+
+    
+  </section>
+
+
+
+  
+        <div class="newsletter">
+            <div class="contnaier">
+                <div class="text">
+                    <h4>sign up </h4>
+                    <p>Get email updates about our latest online store</p>
+                </div>
+
+                <div class="subscribe-form">
+                    <form action="">
+                        <input type="email" placeholder="Enter your email here...">
+                        <button class="btn-srch">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="contnaier">
+                <div class="big-rows">
+                    <h6 class="logo">ONLINE <span>STORE</span></h6>
+                    <p>Lorem ipsum dolor sit, amet consectetur 
+                        adipisicing elit. Dolorum perferendis iste officia!</p>
+                        <div class="coical-icon">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-google-plus-g"></i></a>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <h2 class="tittle">Information</h2>
+                    <div class="links">
+                        <a href="#">Online Stores</a>
+                        <a href="#">Delivery Time</a>
+                        <a href="#">About</a>
+                        <a href="#">More</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h2 class="tittle">Useful Links</h2>
+                    <div class="links">
+                        <a href="#">Online Stores</a>
+                        <a href="#">Delivery Time</a>
+                        <a href="#">About</a>
+                        <a href="#">More</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h2 class="tittle">Service</h2>
+                    <div class="links">
+                        <a href="#">Online Stores</a>
+                        <a href="#">Delivery Time</a>
+                        <a href="#">About</a>
+                        <a href="#">More</a>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-footer">
+                <div class="content">
+                    <p>&copy; 2024 | Made by <span> Md Nishan Chowdhury,Arifuzzaman,Tonmoy</span></p>
+
+                    <div class="payment-img">
+                        <img src="img/payment-1.png" alt="">
+                        <img src="img/payment-2.png" alt="">
+                        <img src="img/payment-3.png" alt="">
+                        <img src="img/payment-4.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+cdnjs.cloudflare.com
